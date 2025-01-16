@@ -8,11 +8,11 @@
             <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
                 <div class="relative mb-4">
                     <label for="username" class="leading-7 text-sm">Username</label>
-                    <input type="text" id="username" name="Benutzername" required minlength="3" maxlength="30" class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    <input type="text" id="username" name="Benutzername" ngModel required minlength="3" maxlength="30" class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                 </div>
                 <div class="relative mb-4">
                     <label for="password" class="leading-7 text-sm">Passwort</label>
-                    <input type="password" id="password" name="Passwort" required minlength="8" class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    <input type="password" id="password" name="Passwort" ngModel required minlength="8" class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-yellow-900 rounded border border-gray-600 focus:border-yellow-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                 </div>
                 <button type="submit" class="w-full text-gray-950 bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:opacity-75 rounded text-lg transition">Bestätigen</button>
             </form>
