@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { UserRegister } from '../model/user-register';
-import { UserService } from '../service/userLogin.service';
+import { CreateUser } from '../model/user/create-user';
+import { AuthService } from '../service/auth.service';
 import { NgForm, FormsModule } from '@angular/forms';
 
 
@@ -15,7 +15,7 @@ import { NgForm, FormsModule } from '@angular/forms';
 export class RegisterComponent implements OnInit{
   title = 'Regestrieren';
 
-  public userRegister: UserRegister = {
+  public userRegister: CreateUser = {
     username: '',
     email: '',
     password: ''
@@ -24,14 +24,14 @@ export class RegisterComponent implements OnInit{
   public errorMessage: string | null = null;
   public successMessage: string | null = null;
 
-  constructor(private userService: UserService, private router: Router){}
+  constructor(private authService: AuthService, private router: Router){}
 
   ngOnInit(): void {}
 
 
-  public registerUser(loginForm: NgForm): void {
+  public register(loginForm: NgForm): void {
     if (loginForm.valid) {
-      this.userService.registUser(this.userRegister).subscribe({
+      this.authService.register(this.userRegister).subscribe({
         next: (res) => {
           console.log('Erfolgreich registriert:', res);
           this.successMessage = 'Registrierung erfolgreich! Weiterleitung...';
