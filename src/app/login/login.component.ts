@@ -18,8 +18,6 @@ const errorUnauthorizedString = 'Falscher Benutzername oder falsches Passwort.';
 })
 export class LoginComponent implements OnInit{
   title = 'Anmeldung';
-  usernameInput = "";
-  passwordInput = "";
 
   public errorMessage: string | null = null;
   public successMessage: string | null = null;
