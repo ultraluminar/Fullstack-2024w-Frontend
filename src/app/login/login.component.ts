@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit{
 
   public login(loginForm: NgForm): void {
     if (!loginForm.valid) {
+      this.successMessage = null;
       this.errorMessage = 'Bitte fülle alle Felder korrekt aus:\n';
       const errors = loginForm.controls;
       const errorMessages = [];
@@ -63,10 +64,11 @@ export class LoginComponent implements OnInit{
           return;
         }
         this.errorMessage = null;
+        this.successMessage = 'Anmeldung erfolgreich. Weiterleitung...';
         this.router.navigate([`/user/${userId}`]);
       },
       error: (response) => {
-        console.error('Fehler bei der Anmeldung:', response);
+        this.successMessage = null;
         if (response.status === 401) {
           this.errorMessage = errorUnauthorizedString;
           return;
@@ -74,6 +76,5 @@ export class LoginComponent implements OnInit{
         this.errorMessage = errorTryAgainString;
       }
     });
-    console.log('Test');
   }
 }
