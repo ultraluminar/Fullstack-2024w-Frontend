@@ -1,2 +1,6 @@
-<h2>Fragen Titel: {{ question?.title }}</h2>
-<p>Fragen Body: {{ question?.body }}</p>
+<div *ngIf="questions" class="flex flex-col items-start gap-4 mb-32 mx-4">
+    <p class="text-gray-300 text-2xl ml-8">hat <span class="font-bold text-yellow-500">{{ questions.length }}</span> Fragen gestellt</p>
+    <div *ngFor="let question of questions" class="w-full">
+        <app-question [question]="question"></app-question>
+    </div>
+</div>

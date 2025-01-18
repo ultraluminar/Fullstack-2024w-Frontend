@@ -1,48 +1,39 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { UserService } from '../service/user.service';
 import { QuestionArray } from '../model/question/question-array';
 import { User } from '../model/user/user';
+import { CommonModule } from '@angular/common';
+import { QuestionComponent } from '../question/question.component';
 
 @Component({
   selector: 'app-user-questions',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, QuestionComponent],
   templateUrl: './user-questions.component.html',
   styleUrl: './user-questions.component.css'
 })
 export class UserQuestionsComponent {
+  @Input() user!: User;
   private userService: UserService;
-  private route: ActivatedRoute;
 
-  question: QuestionArray | null = null;
-  user: User | null = null;
-  error: boolean = false;
+  questions: QuestionArray | null = null;
 
-  constructor(route: ActivatedRoute, userService: UserService) {
+  constructor(userService: UserService) {
     this.userService = userService;
-    this.route = route;
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) =>{
-      const userId = parseInt(params.get('userId') || '');
-      this.getUserQuestion(userId);
-    });
+    this.getUserQuestion(this.user);
   }
 
-  private getUserQuestion(userId: number): void{
-    if (isNaN(userId)) {
-      this.error = true;
-      return
-    }
+  private getUserQuestion(user: User): void{
+    const userId = user.id;
     this.userService.getUserQuestion(userId).subscribe({
-      next: (question) => {
-        this.error = false;
-        this.question = question;
+      next: (questions) => {
+        this.questions = questions;
       },
       error: (error) => {
-        this.error = true;
+        console.log(error);
       }
     });
   }
