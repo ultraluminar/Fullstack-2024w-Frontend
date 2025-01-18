@@ -9,7 +9,11 @@ import { LoginResponse as LoginResponseInterface } from "../../../../interface/l
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient) { }
+  httpClient: HttpClient;
+
+  constructor(httpClient: HttpClient) {
+    this.httpClient = httpClient;
+  }
 
   public login(loginUser: LoginUser): Observable<LoginResponseInterface>{
     return this.httpClient.post<LoginResponseInterface>('http://localhost:8080/users/login', loginUser);
