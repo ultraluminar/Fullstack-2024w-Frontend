@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Question } from '../model/question/question';
 import { QuestionService } from '../service/question.service';
@@ -10,7 +10,7 @@ import { UserService } from '../service/user.service';
 @Component({
   selector: 'app-question-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, NotFoundComponent, RouterOutlet],
+  imports: [CommonModule, RouterLink, NotFoundComponent],
   templateUrl: './question-page.component.html',
   styleUrl: './question-page.component.css'
 })
