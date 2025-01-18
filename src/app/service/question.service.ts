@@ -18,11 +18,15 @@ export class QuestionService {
     return this.httpClient.get<Question>(`http://localhost:8080/questions/${questionId}`);
   }
 
-  public createQuestion(CreateQuestion: CreateQuestion): Observable<Question>{
+  public createQuestion(CreateQuestion: CreateQuestion): Observable<Question> {
     return this.httpClient.post<Question>(`http://localhost:8080/questions`, CreateQuestion);
   }
 
   public deleteQuestion(questionId: number): Observable<void> {
     return this.httpClient.delete<void>(`http://localhost:8080/questions/${questionId}`)
+  }
+
+  public getAllQuestions(): Observable<Question[]> {
+    return this.httpClient.get<Question[]>(`http://localhost:8080/questions`);
   }
 }
