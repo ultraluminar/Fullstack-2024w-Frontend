@@ -5,6 +5,8 @@ import { Question } from '../model/question/question';
 import { CreateQuestion } from '../model/question/create-question';
 import { QuestionArray } from '../model/question/question-array';
 import { AnswerArray } from '../model/answer/answer-array';
+import { CreateAnswer } from '../model/answer/create-answer';
+import { Answer } from '../model/answer/answer';
 
 @Injectable({
   providedIn: 'root'
@@ -25,13 +27,18 @@ export class QuestionService {
   }
 
   public deleteQuestion(questionId: number): Observable<void> {
-    return this.httpClient.delete<void>(`http://localhost:8080/questions/${questionId}`)
+    return this.httpClient.delete<void>(`http://localhost:8080/questions/${questionId}`);
   }
 
   public getAllQuestions(): Observable<QuestionArray> {
     return this.httpClient.get<QuestionArray>(`http://localhost:8080/questions`);
   }
+
   public getQuestionAnswers(questionId: number): Observable<AnswerArray>{
-    return this.httpClient.get<AnswerArray>(`http://localhost:8080/questions/${questionId}/answers`)
+    return this.httpClient.get<AnswerArray>(`http://localhost:8080/questions/${questionId}/answers`);
+  }
+
+  public createAnswer(createAnswer: CreateAnswer, questionId: number): Observable<Answer>{
+    return this.httpClient.post<Answer>(`http://localhost:8080/questions/${questionId}/answers`, createAnswer);
   }
 }
