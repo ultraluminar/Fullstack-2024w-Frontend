@@ -5,13 +5,13 @@ import { QuestionArray } from '../model/question/question-array';
 import { User } from '../model/user/user';
 
 @Component({
-  selector: 'app-myquestion-page',
+  selector: 'app-user-questions',
   standalone: true,
   imports: [],
-  templateUrl: './myquestion-page.component.html',
-  styleUrl: './myquestion-page.component.css'
+  templateUrl: './user-questions.component.html',
+  styleUrl: './user-questions.component.css'
 })
-export class MyquestionPageComponent {
+export class UserQuestionsComponent {
   private userService: UserService;
   private route: ActivatedRoute;
 
