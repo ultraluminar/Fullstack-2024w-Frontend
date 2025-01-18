@@ -10,5 +10,5 @@ export const routes: Routes = [
     { path: 'registrieren', component: RegisterComponent},
     { path: 'kontakt', component: KontaktComponent},
     { path: 'datenschutzerklärung', component: DatenschutzComponent},
-    { path: 'users/:userId', component: UserpageComponent}
+    { path: 'user/:userId', component: UserpageComponent},
 ];
