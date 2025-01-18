@@ -15,6 +15,7 @@
                 </div>
                 <p class="text-gray-400 text-sm">Mitglied seit {{ user?.createdAt | date:'dd.MM.yyyy' }}</p>
             </div>
+            <app-user-questions *ngIf="user" [user] = "user" class="w-5/6"></app-user-questions>
         </div>
     </section>
 </ng-template>

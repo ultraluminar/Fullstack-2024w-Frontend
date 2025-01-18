@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { User } from '../model/user/user';
 import { UserService } from '../service/user.service';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import { UserQuestionsComponent } from '../user-questions/user-questions.component';
 
 @Component({
   selector: 'app-user-page',
   standalone: true,
-  imports: [CommonModule, NotFoundComponent],
+  imports: [CommonModule, NotFoundComponent, UserQuestionsComponent],
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.css'
 })
@@ -23,12 +24,14 @@ export class UserPageComponent{
     this.userService = userService;
     this.route = route;
   }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) =>{
       const userId = parseInt(params.get('userId') || '');
       this.getUser(userId);
     });
   }
+
   private getUser(userId: number): void{
     if (isNaN(userId)) {
       this.error = true;
@@ -38,11 +41,9 @@ export class UserPageComponent{
       next: (user) => {
         this.error = false;
         this.user = user;
-        console.log(this.user);
-        console.log(this.user.createdAt);
       },
       error: (error) => {
-        this.error = true;
+        console.log(error);
       }
     });
   }
