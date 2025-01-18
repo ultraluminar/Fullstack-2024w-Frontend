@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../model/user/user';
 import { Observable } from 'rxjs';
-import { Question } from '../model/question/question';
+import { QuestionArray } from '../model/question/question-array';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class UserService {
   public deleteUser(userId:number):Observable<User>{
     return this.httpClient.delete<User>(`http://localhost:8080/users/${userId}`)
   }
-  public getUserQuestions(userId: number):Observable<Question>{
-    return this.httpClient.get<Question>(`http://localhost:8080/users/${userId}/questions`)
+  public getUserQuestion(userId: number):Observable<QuestionArray>{
+    return this.httpClient.get<QuestionArray>(`http://localhost:8080/users/${userId}/questions`)
   }
 }
