@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Question } from '../model/question/question';
 import { QuestionService } from '../service/question.service';
 import { NotFoundComponent } from "../not-found/not-found.component";

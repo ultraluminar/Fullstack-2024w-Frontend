@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../service/user.service';
-import { __param } from 'tslib';
+import { Component } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { User } from '../model/user/user';
+import { UserService } from '../service/user.service';
+import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
-  selector: 'app-userpage',
+  selector: 'app-user-page',
   standalone: true,
-  imports: [],
-  templateUrl: './userpage.component.html',
-  styleUrl: './userpage.component.css'
+  imports: [CommonModule, NotFoundComponent],
+  templateUrl: './user-page.component.html',
+  styleUrl: './user-page.component.css'
 })
-export class UserpageComponent{
+export class UserPageComponent{
   private userService: UserService;
   private route: ActivatedRoute;
 
@@ -23,7 +24,7 @@ export class UserpageComponent{
     this.route = route;
   }
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params =>{
+    this.route.paramMap.subscribe((params: ParamMap) =>{
       const userId = parseInt(params.get('userId') || '');
       this.getUser(userId);
     });
@@ -37,6 +38,8 @@ export class UserpageComponent{
       next: (user) => {
         this.error = false;
         this.user = user;
+        console.log(this.user);
+        console.log(this.user.createdAt);
       },
       error: (error) => {
         this.error = true;
