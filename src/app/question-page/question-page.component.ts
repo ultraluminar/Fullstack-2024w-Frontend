@@ -6,11 +6,12 @@ import { QuestionService } from '../service/question.service';
 import { NotFoundComponent } from "../not-found/not-found.component";
 import { User } from '../model/user/user';
 import { UserService } from '../service/user.service';
+import { QuestionAnswersComponent } from '../question-answers/question-answers.component';
 
 @Component({
   selector: 'app-question-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, NotFoundComponent],
+  imports: [CommonModule, RouterLink, NotFoundComponent, QuestionAnswersComponent],
   templateUrl: './question-page.component.html',
   styleUrl: './question-page.component.css'
 })
