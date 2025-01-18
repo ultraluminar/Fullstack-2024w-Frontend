@@ -32,6 +32,6 @@ export class QuestionService {
     return this.httpClient.get<QuestionArray>(`http://localhost:8080/questions`);
   }
   public getQuestionAnswers(questionId: number): Observable<AnswerArray>{
-    return this.httpClient.get<AnswerArray>(`http://localhost:8080/questions/${questionId}/answer`)
+    return this.httpClient.get<AnswerArray>(`http://localhost:8080/questions/${questionId}/answers`)
   }
 }
