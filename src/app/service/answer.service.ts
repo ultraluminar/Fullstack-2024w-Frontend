@@ -14,6 +14,10 @@ export class AnswerService {
   }
 
   public getAnswer(answerId: number): Observable<Answer> {
-    return this.httpClient.get<Answer>(`http://localhost:8080/questions/${answerId}`);
+    return this.httpClient.get<Answer>(`http://localhost:8080/answers/${answerId}`);
+  }
+
+  public deleteAnswer(answerId: number): Observable<void> {
+    return this.httpClient.delete<void>(`http://localhost:8080/answers/${answerId}`);
   }
 }
