@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Question } from '../model/question/question';
@@ -8,15 +8,23 @@ import { AnswerArray } from '../model/answer/answer-array';
 import { CreateAnswer } from '../model/answer/create-answer';
 import { Answer } from '../model/answer/answer';
 import { UpdateQuestion } from '../model/question/update-question';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
   httpClient: HttpClient;
+  authService: AuthService;
 
-  constructor(httpClient: HttpClient) {
+  constructor(httpClient: HttpClient, authService: AuthService) {
     this.httpClient = httpClient;
+    this.authService = authService;
+  }
+
+  private getHeaderWithToken(): HttpHeaders {
+    const token = this.authService.getToken();
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
   public getQuestion(questionId: number): Observable<Question> {
@@ -40,7 +48,8 @@ export class QuestionService {
   }
 
   public createAnswer(createAnswer: CreateAnswer, questionId: number): Observable<Answer>{
-    return this.httpClient.post<Answer>(`http://localhost:8080/questions/${questionId}/answers`, createAnswer);
+    const headers = this.getHeaderWithToken();
+    return this.httpClient.post<Answer>(`http://localhost:8080/questions/${questionId}/answers`, createAnswer, {headers});
   }
 
   public updateQuestion(questionId: number, updateQuestion: UpdateQuestion): Observable<Question>{
