@@ -7,6 +7,7 @@ import { QuestionArray } from '../model/question/question-array';
 import { AnswerArray } from '../model/answer/answer-array';
 import { CreateAnswer } from '../model/answer/create-answer';
 import { Answer } from '../model/answer/answer';
+import { UpdateQuestion } from '../model/question/update-question';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,9 @@ export class QuestionService {
 
   public createAnswer(createAnswer: CreateAnswer, questionId: number): Observable<Answer>{
     return this.httpClient.post<Answer>(`http://localhost:8080/questions/${questionId}/answers`, createAnswer);
+  }
+
+  public updateQuestion(questionId: number, updateQuestion: UpdateQuestion): Observable<Question>{
+    return this.httpClient.patch<Question>(`http://localhost:8080/questions/${questionId}`, updateQuestion);
   }
 }
