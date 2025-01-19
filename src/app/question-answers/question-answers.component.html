@@ -1,0 +1,6 @@
+<div *ngIf="answers" class="flex flex-col items-start gap-4 mb-32 mx-4">
+    <p class="text-gray-300 text-2xl ml-8"><span class="font-bold text-yellow-500">{{ answers.length }}</span> Antworten</p>
+    <div *ngFor="let answer of answers" class="w-full">
+        <app-answer [answer]="answer"></app-answer>
+    </div>
+</div>
