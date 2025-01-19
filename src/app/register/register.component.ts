@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit{
   ngOnInit(): void {}
 
   public register(registerForm: NgForm): void {
-    if (!registerForm.valid) {
+    if (registerForm.invalid) {
       this.successMessage = null;
       this.errorMessage = 'Bitte fülle alle Felder korrekt aus:\n';
       const errors = registerForm.controls;
