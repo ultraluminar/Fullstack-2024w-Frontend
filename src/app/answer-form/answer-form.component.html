@@ -1,4 +1,7 @@
-<form (ngSubmit)="submitAnswer()" class="w-full bg-gray-800 rounded-lg p-8 flex flex-col items-end gap-4">
-    <textarea [(ngModel)]="answerBody" name="answer" class="w-full h-32 p-4 border bg-gray-700 border-gray-300 rounded-md"></textarea>
+<form #answerForm="ngForm" (ngSubmit)="submitAnswer(answerForm)" class="w-full bg-gray-800 rounded-lg p-8 flex flex-col items-end gap-4">
+    <div *ngIf="errorMessage" class="bg-red-500 text-white p-3 mb-3 rounded" style="white-space: pre-line;">
+        {{ errorMessage }}
+    </div>
+    <textarea [(ngModel)]="answerBody" ngModel required minlength="10" name="answer" class="w-full h-32 p-4 border bg-gray-700 border-gray-300 rounded-md"></textarea>
     <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-600">Antwort senden</button>
 </form>
