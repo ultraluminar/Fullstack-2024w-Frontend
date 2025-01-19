@@ -1,4 +1,4 @@
-import{Answer as AnswerInterface} from '../../../../../interface/answer'
+import {Answer as AnswerInterface} from '../../../../../interface/answer'
 
 export class Answer implements AnswerInterface {
     id: number;
