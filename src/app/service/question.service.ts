@@ -32,7 +32,8 @@ export class QuestionService {
   }
 
   public createQuestion(CreateQuestion: CreateQuestion): Observable<Question> {
-    return this.httpClient.post<Question>(`http://localhost:8080/questions`, CreateQuestion);
+    const headers = this.getHeaderWithToken();
+    return this.httpClient.post<Question>(`http://localhost:8080/questions`, CreateQuestion, {headers});
   }
 
   public deleteQuestion(questionId: number): Observable<void> {
