@@ -1,0 +1,22 @@
+<section class="text-gray-300">
+    <div class="container px-5 py-5 mx-auto flex flex-col items-center">
+        <div class="w-5/6 flex flex-col items-start">
+            <h1 class="text-3xl font-bold mb-4">Frage stellen</h1>
+            <form #questionForm="ngForm" (ngSubmit)="submitQuestion(questionForm)" class="w-full bg-gray-800 rounded-lg p-8 mb-5 flex flex-col items-end gap-4">
+                <div class="w-full flex flex-col">
+                    <div *ngIf="errorMessage" class="bg-red-500 text-white p-3 mb-3 rounded" style="white-space: pre-line;">
+                        {{ errorMessage }}
+                    </div>
+                    <div *ngIf="successMessage" class="bg-green-500 text-black p-3 mb-3 rounded">
+                        {{ successMessage }}
+                    </div>
+                    <label for="title" class="text-sm">Frage</label>
+                    <input type="text" id="title" name="Frage" ngModel required minlength="10" maxlength="150" class="w-full bg-gray-700 rounded-md p-2 mb-4">
+                    <label for="body" class="text-sm">Beschreibung</label>
+                    <textarea id="body" name="Beschreibung" ngModel required minlength="10" class="w-full h-32 p-4 border bg-gray-700 border-gray-300 rounded-md"></textarea>
+                </div>
+                <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-600 transition">Frage senden</button>
+            </form>
+        </div>
+    </div>
+</section>
