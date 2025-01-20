@@ -1,12 +1,12 @@
 <div *ngIf="answers" class="flex flex-col items-start gap-4 mb-32 mx-4">
     <div class="w-full flex flex-row justify-between gap-8 px-8">
         <p class="text-gray-300 text-2xl"><span class="font-bold text-yellow-500">{{ answers.length }}</span> Antworten</p>
-        <button *ngIf="!showAnswerForm && isLoggedIn" class="bg-yellow-500 text-white px-4 py-2 rounded-md" (click)="showAnswerForm = !showAnswerForm">
+        <button *ngIf="!showAnswerForm && isLoggedIn" class="bg-yellow-500 text-gray-950 px-4 py-2 rounded-md hover:bg-yellow-400" (click)="showAnswerForm = !showAnswerForm">
             Antworten
         </button>
     </div>
     <app-answer-form *ngIf="showAnswerForm" [question]="question" (answerSubmitted)="onAnswerSubmitted($event)" class="w-full"></app-answer-form>
     <div *ngFor="let answer of answers" class="w-full">
-        <app-answer [answer]="answer"></app-answer>
+        <app-answer [answer]="answer" (delete)="onDeleteAnswer($event)"></app-answer>
     </div>
 </div>

@@ -65,4 +65,13 @@ export class QuestionAnswersComponent {
       }
     });
   }
+
+  onDeleteAnswer(answerId: number): void {
+    for (let i = 0; i < this.answers!.length; i++) {
+      if (this.answers![i].id === answerId) {
+        this.answers!.splice(i, 1);
+        break;
+      }
+    }
+  }
 }
