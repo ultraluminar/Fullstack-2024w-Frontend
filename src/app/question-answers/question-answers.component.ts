@@ -39,7 +39,7 @@ export class QuestionAnswersComponent {
     });
   }
 
-  private getQuestionAnswers(question: Question): void{
+  getQuestionAnswers(question: Question): void{
     const questionId = question.id;
     this.questionService.getQuestionAnswers(questionId).subscribe({
       next: (answers) => {
