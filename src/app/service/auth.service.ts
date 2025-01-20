@@ -6,23 +6,20 @@ import { CreateUser } from '../model/user/create-user';
 import { LoginResponse as LoginResponseInterface } from "../../../../interface/login-response";
 import { User } from '../model/user/user';
 import { decodeJwt } from 'jose';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  httpClient: HttpClient;
-  userService: UserService;
+  private httpClient: HttpClient;
 
   private tokenKey = 'token';
   private userKey = 'user';
   private loggedIn = new BehaviorSubject<boolean>(this.hatToken());
   private user = new BehaviorSubject<User | null>(this.getUser());
 
-  constructor(httpClient: HttpClient, userService: UserService) {
+  constructor(httpClient: HttpClient) {
     this.httpClient = httpClient;
-    this.userService = userService;
   }
 
   private hatToken(): boolean {
@@ -41,7 +38,7 @@ export class AuthService {
       return;
     }
     const userId = Number(userIdField);
-    this.userService.getUser(userId).subscribe(user => {
+    this.httpClient.get<User>(`http://localhost:8080/users/${userId}`).subscribe(user => {
       localStorage.setItem(this.tokenKey, token);
       localStorage.setItem(this.userKey, JSON.stringify(user));
       this.loggedIn.next(true);
