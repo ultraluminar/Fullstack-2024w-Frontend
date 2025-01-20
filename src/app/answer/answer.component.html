@@ -1,9 +1,7 @@
 <div class="w-full bg-gray-800 rounded-lg p-8 flex flex-col items-start gap-4">
     <div class="w-full flex flex-row items-start justify-between gap-8">
         <p>{{ answer.body }}</p>
-        <button *ngIf="creatorUser && creatorUser.id === currentUser?.id" class="bg-red-400 text-gray-950 px-4 py-2 rounded-md hover:bg-red-500" (click)="deleteAnswer()">
-            Löschen
-        </button>
+        <button *ngIf="creatorUser && creatorUser.id === currentUser?.id" class="bg-red-400 text-gray-950 px-4 py-2 rounded-md hover:bg-red-500" (click)="deleteAnswer()">Löschen</button>
     </div>
     <div class="w-full flex flex-row items-end justify-between gap-4">
         <p class="text-gray-400 text-sm">{{ answer.createdAt | date:'dd.MM.yyyy HH:mm' }} <span *ngIf="answer.createdAt !== answer.updatedAt" class="text-gray-400 text-sm">(bearbeitet)</span></p>
