@@ -7,7 +7,6 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { decodeJwt } from 'jose';
 
 const errorTryAgainString = 'Es gab einen Fehler bei der Registrierung. Bitte versuche es erneut.';
-const errorUnauthorizedString = 'Falscher Benutzername oder falsches Passwort.';
 const errorUsernameTakenString = 'Der Benutzername ist bereits vergeben.';
 
 @Component({
@@ -28,7 +27,7 @@ export class RegisterComponent implements OnInit{
   ngOnInit(): void {}
 
   public register(registerForm: NgForm): void {
-    if (!registerForm.valid) {
+    if (registerForm.invalid) {
       this.successMessage = null;
       this.errorMessage = 'Bitte fülle alle Felder korrekt aus:\n';
       const errors = registerForm.controls;

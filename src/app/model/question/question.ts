@@ -7,7 +7,6 @@ export class Question implements QuestionInterface {
     createdAt: Date;
     updatedAt: Date;
     userId: number;
-    votes: number;
 
     constructor(
         id: number,
@@ -16,7 +15,6 @@ export class Question implements QuestionInterface {
         createdAt: Date,
         updatedAt: Date,
         userId: number,
-        votes: number
     ) {
         this.id = id;
         this.title = title;
@@ -24,6 +22,5 @@ export class Question implements QuestionInterface {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.userId = userId;
-        this.votes = votes;
     }
 }

@@ -28,7 +28,7 @@ export class UserQuestionsComponent {
 
   private getUserQuestion(user: User): void{
     const userId = user.id;
-    this.userService.getUserQuestion(userId).subscribe({
+    this.userService.getUserQuestions(userId).subscribe({
       next: (questions) => {
         this.questions = questions;
       },

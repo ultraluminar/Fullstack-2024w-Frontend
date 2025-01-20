@@ -17,7 +17,7 @@ export class UserService {
   public deleteUser(userId:number):Observable<User>{
     return this.httpClient.delete<User>(`http://localhost:8080/users/${userId}`)
   }
-  public getUserQuestion(userId: number):Observable<QuestionArray>{
+  public getUserQuestions(userId: number):Observable<QuestionArray>{
     return this.httpClient.get<QuestionArray>(`http://localhost:8080/users/${userId}/questions`)
   }
 }
