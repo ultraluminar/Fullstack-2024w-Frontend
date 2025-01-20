@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Question } from '../model/question/question';
@@ -7,15 +7,24 @@ import { QuestionArray } from '../model/question/question-array';
 import { AnswerArray } from '../model/answer/answer-array';
 import { CreateAnswer } from '../model/answer/create-answer';
 import { Answer } from '../model/answer/answer';
+import { UpdateQuestion } from '../model/question/update-question';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
   httpClient: HttpClient;
+  authService: AuthService;
 
-  constructor(httpClient: HttpClient) {
+  constructor(httpClient: HttpClient, authService: AuthService) {
     this.httpClient = httpClient;
+    this.authService = authService;
+  }
+
+  private getHeaderWithToken(): HttpHeaders {
+    const token = this.authService.getToken();
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
   public getQuestion(questionId: number): Observable<Question> {
@@ -23,11 +32,13 @@ export class QuestionService {
   }
 
   public createQuestion(CreateQuestion: CreateQuestion): Observable<Question> {
-    return this.httpClient.post<Question>(`http://localhost:8080/questions`, CreateQuestion);
+    const headers = this.getHeaderWithToken();
+    return this.httpClient.post<Question>(`http://localhost:8080/questions`, CreateQuestion, { headers });
   }
 
   public deleteQuestion(questionId: number): Observable<void> {
-    return this.httpClient.delete<void>(`http://localhost:8080/questions/${questionId}`);
+    const headers = this.getHeaderWithToken();
+    return this.httpClient.delete<void>(`http://localhost:8080/questions/${questionId}`, { headers });
   }
 
   public getAllQuestions(): Observable<QuestionArray> {
@@ -39,6 +50,11 @@ export class QuestionService {
   }
 
   public createAnswer(createAnswer: CreateAnswer, questionId: number): Observable<Answer>{
-    return this.httpClient.post<Answer>(`http://localhost:8080/questions/${questionId}/answers`, createAnswer);
+    const headers = this.getHeaderWithToken();
+    return this.httpClient.post<Answer>(`http://localhost:8080/questions/${questionId}/answers`, createAnswer, { headers });
+  }
+
+  public updateQuestion(questionId: number, updateQuestion: UpdateQuestion): Observable<Question>{
+    return this.httpClient.patch<Question>(`http://localhost:8080/questions/${questionId}`, updateQuestion);
   }
 }
