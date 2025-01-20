@@ -33,11 +33,12 @@ export class QuestionService {
 
   public createQuestion(CreateQuestion: CreateQuestion): Observable<Question> {
     const headers = this.getHeaderWithToken();
-    return this.httpClient.post<Question>(`http://localhost:8080/questions`, CreateQuestion, {headers});
+    return this.httpClient.post<Question>(`http://localhost:8080/questions`, CreateQuestion, { headers });
   }
 
   public deleteQuestion(questionId: number): Observable<void> {
-    return this.httpClient.delete<void>(`http://localhost:8080/questions/${questionId}`);
+    const headers = this.getHeaderWithToken();
+    return this.httpClient.delete<void>(`http://localhost:8080/questions/${questionId}`, { headers });
   }
 
   public getAllQuestions(): Observable<QuestionArray> {
@@ -50,7 +51,7 @@ export class QuestionService {
 
   public createAnswer(createAnswer: CreateAnswer, questionId: number): Observable<Answer>{
     const headers = this.getHeaderWithToken();
-    return this.httpClient.post<Answer>(`http://localhost:8080/questions/${questionId}/answers`, createAnswer, {headers});
+    return this.httpClient.post<Answer>(`http://localhost:8080/questions/${questionId}/answers`, createAnswer, { headers });
   }
 
   public updateQuestion(questionId: number, updateQuestion: UpdateQuestion): Observable<Question>{
