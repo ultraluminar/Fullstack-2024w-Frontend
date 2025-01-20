@@ -4,7 +4,7 @@ import { RegisterComponent } from './register/register.component';
 import { KontaktComponent } from './kontakt/kontakt.component';
 import { DatenschutzComponent } from './datenschutz/datenschutz.component';
 import { QuestionPageComponent } from './question-page/question-page.component';
-import { UserPageComponent } from './userpage/user-page.component';
+import { UserPageComponent } from './user-page/user-page.component';
 import { QuestionFormPageComponent } from './question-form-page/question-form-page.component';
 import { authGuard } from './guards/auth.guard';
 
