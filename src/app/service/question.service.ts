@@ -10,6 +10,11 @@ import { Answer } from '../model/answer/answer';
 import { UpdateQuestion } from '../model/question/update-question';
 import { AuthService } from './auth.service';
 
+export enum SortEnum {
+  NEWEST = 'newest',
+  OLDEST = 'oldest',
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,8 +46,8 @@ export class QuestionService {
     return this.httpClient.delete<void>(`http://localhost:8080/questions/${questionId}`, { headers });
   }
 
-  public getAllQuestions(): Observable<QuestionArray> {
-    return this.httpClient.get<QuestionArray>(`http://localhost:8080/questions`);
+  public searchQuestions(searchQuery: string, sort: string): Observable<QuestionArray> {
+    return this.httpClient.get<QuestionArray>(`http://localhost:8080/questions?search=${searchQuery}&sort=${sort}`);
   }
 
   public getQuestionAnswers(questionId: number): Observable<AnswerArray>{

@@ -7,6 +7,7 @@ import { QuestionPageComponent } from './question-page/question-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { QuestionFormPageComponent } from './question-form-page/question-form-page.component';
 import { authGuard } from './guards/auth.guard';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 export const routes: Routes = [
     { path: 'anmelden', component: LoginComponent},
@@ -16,4 +17,5 @@ export const routes: Routes = [
     { path: 'user/:userId', component: UserPageComponent},
     { path: 'question/:questionId', component: QuestionPageComponent},
     { path: 'frage-stellen', component: QuestionFormPageComponent, canActivate: [authGuard]},
+    { path: 'suche', component: SearchPageComponent},
 ];
