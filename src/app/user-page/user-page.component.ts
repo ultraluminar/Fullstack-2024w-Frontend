@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { User } from '../model/user/user';
 import { UserService } from '../service/user.service';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { UserQuestionsComponent } from '../user-questions/user-questions.component';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-user-page',
@@ -15,13 +16,18 @@ import { UserQuestionsComponent } from '../user-questions/user-questions.compone
 })
 export class UserPageComponent{
   private userService: UserService;
+  private authService: AuthService;
+  private router: Router;
   private route: ActivatedRoute;
 
   user: User | null = null;
+  currentUser: User | null = null;
   error: boolean = false;
 
-  constructor(route: ActivatedRoute, userService: UserService) {
+  constructor(route: ActivatedRoute, authService: AuthService, router: Router, userService: UserService) {
     this.userService = userService;
+    this.authService = authService;
+    this.router = router;
     this.route = route;
   }
 
@@ -29,6 +35,9 @@ export class UserPageComponent{
     this.route.paramMap.subscribe((params: ParamMap) =>{
       const userId = parseInt(params.get('userId') || '');
       this.getUser(userId);
+    });
+    this.authService.getUserObservable().subscribe((user: User | null) => {
+      this.currentUser = user;
     });
   }
 
@@ -46,5 +55,22 @@ export class UserPageComponent{
         console.log(error);
       }
     });
+  }
+
+  public deleteUser(): void {
+    if ((this.currentUser && this.user?.id === this.currentUser.id) || this.currentUser?.isAdmin) {
+      this.userService.deleteUser(this.user?.id || 0).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+          this.authService.logout();
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            this.authService.logout();
+          }
+          console.log(error);
+        }
+      });
+    }
   }
 }
