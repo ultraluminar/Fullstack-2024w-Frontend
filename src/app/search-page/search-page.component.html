@@ -1,0 +1,31 @@
+<section class="text-gray-300">
+    <div class="container px-5 py-5 mx-auto flex flex-col items-center">
+        <div class="w-5/6 flex flex-col items-start">
+            <h1 class="text-3xl font-bold mb-4">Fragen suchen</h1>
+            <form #searchForm="ngForm" (ngSubmit)="submitSearch()" class="w-full bg-gray-800 rounded-lg p-8 mb-5 flex flex-col items-start gap-4">
+                <div class="w-full flex flex-row items-center gap-4">
+                    <input type="text" id="search" name="Suche" [(ngModel)]="searchQuery" placeholder="Suche" class="w-full bg-gray-700 rounded-md p-2">
+                    <button type="submit" class="bg-yellow-500 text-gray-950 px-4 py-2 rounded-md hover:cursor-pointer hover:bg-yellow-600 transition">Suchen</button>
+                </div>
+                <div class="w-full flex flex-row items-center gap-4">
+                    <input type="radio" id="newest" name="Sortierung" [value]="sortEnum.NEWEST" [(ngModel)]="sort" class="bg-gray-700 rounded-md p-2">
+                    <label for="newest" class="text-sm">Neueste zuerst</label>
+                    <input type="radio" id="oldest" name="Sortierung" [value]="sortEnum.OLDEST" [(ngModel)]="sort" class="bg-gray-700 rounded-md p-2">
+                    <label for="oldest" class="text-sm">Älteste zuerst</label>
+                </div>
+            </form>
+            <div *ngIf="questions && questions.length === 0" class="w-full flex flex-col items-center gap-3">
+                <p>Keine Fragen gefunden.</p>
+                <p>
+                    <a routerLink="/frage-stellen" class="text-yellow-500 hover:underline cursor-pointer">Stellen Sie die erste Frage!</a>
+                </p>
+            </div>
+            <div *ngIf="questions && questions.length > 0" class="w-full flex flex-col items-start gap-4 mb-32 px-4">
+                <p class="text-gray-300 text-2xl ml-8"><span class="font-bold text-yellow-500">{{ questions.length }}</span> Fragen gefunden</p>
+                <div *ngFor="let question of questions" class="w-full">
+                    <app-question [question]="question"></app-question>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
